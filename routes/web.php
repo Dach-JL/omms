@@ -8,6 +8,8 @@ use App\Http\Controllers\organAdminController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TelebirrManualController;
+use App\Http\Controllers\Admin\TelebirrVerificationController;
 
 
 
