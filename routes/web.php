@@ -117,10 +117,6 @@ Route::get('/event1', [MemberController::class, 'event12']);
 
 Route::get('/profile', [MemberController::class, 'profile']);
 
-// Telebirr Manual Payment Routes
-use App\Http\Controllers\TelebirrManualController;
-use App\Http\Controllers\Admin\TelebirrVerificationController;
-
 // Payment landing page (shows all payment methods)
 Route::get('/payment', function () {
     return view('payment.index');

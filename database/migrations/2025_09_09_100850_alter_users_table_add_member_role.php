@@ -12,7 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-         DB::statement("ALTER TABLE users MODIFY role ENUM('guest', 'member', 'organAdmin', 'SuperAdmin') DEFAULT 'organAdmin'");
+        // SQLite doesn't support ENUM or MODIFY, so we'll just ensure the column exists
+        if (!Schema::hasColumn('users', 'role')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->string('role')->default('organAdmin');
+            });
+        }
     }
 
     /**
@@ -20,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         DB::statement("ALTER TABLE users MODIFY role ENUM('guest', 'member', 'organAdmin', 'SuperAdmin') DEFAULT 'organAdmin'");
+        // SQLite rollback - no action needed for this migration
     }
 };
