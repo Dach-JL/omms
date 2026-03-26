@@ -120,12 +120,12 @@ use App\Http\Controllers\TelebirrManualController;
 use App\Http\Controllers\Admin\TelebirrVerificationController;
 
 // Payment landing page (shows all payment methods)
-Route::get('/payment', function() {
+Route::get('/payment', function () {
     return view('payment.index');
 })->middleware(['auth'])->name('payment.index');
 
 // Payment with plan selection
-Route::get('/payment/{plan_id}', function($planId) {
+Route::get('/payment/{plan_id}', function ($planId) {
     try {
         $plan = \App\Models\Plan::findOrFail($planId);
         return view('payment.index', compact('plan'));
