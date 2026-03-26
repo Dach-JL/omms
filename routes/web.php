@@ -119,6 +119,22 @@ Route::get('/profile', [MemberController::class, 'profile']);
 use App\Http\Controllers\TelebirrManualController;
 use App\Http\Controllers\Admin\TelebirrVerificationController;
 
+// Payment landing page (shows all payment methods)
+Route::get('/payment', function() {
+    return view('payment.index');
+})->middleware(['auth'])->name('payment.index');
+
+// Payment with plan selection
+Route::get('/payment/{plan_id}', function($planId) {
+    try {
+        $plan = \App\Models\Plan::findOrFail($planId);
+        return view('payment.index', compact('plan'));
+    } catch (\Exception $e) {
+        return redirect()->route('payment.index')
+            ->with('error', 'Plan not found. Please select a valid plan.');
+    }
+})->middleware(['auth']);
+
 // User routes
 Route::get('/payment/telebirr/{plan_id}', [TelebirrManualController::class, 'showPaymentForm'])
     ->name('payment.telebirr.form')
